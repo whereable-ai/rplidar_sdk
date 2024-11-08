@@ -395,7 +395,7 @@ namespace sl {
         };
 
     public:
-        SlamtecLidarDriver()
+        SlamtecLidarDriver(sl::internal::LIDARSampleDataListener* listener)
             : _isConnected(false)
             , _isSupportingMotorCtrl(MotorCtrlSupportNone)
             , _op_locker(true)
@@ -405,7 +405,7 @@ namespace sl {
         {
             _protocolHandler = std::make_shared< internal::RPLidarProtocolCodec>();
             _transeiver = std::make_shared< internal::AsyncTransceiver>(*_protocolHandler);
-            _dataunpacker.reset(internal::LIDARSampleDataUnpacker::CreateInstance(*this));
+            _dataunpacker.reset(internal::LIDARSampleDataUnpacker::CreateInstance(listener ? *listener : *this));
 
             _protocolHandler->setMessageListener(this);
 
@@ -1695,8 +1695,8 @@ namespace sl {
 
     };
 
-    Result<ILidarDriver*> createLidarDriver()
+    Result<ILidarDriver*> createLidarDriver(internal::LIDARSampleDataListener* listener)
     {
-        return new SlamtecLidarDriver();
+        return new SlamtecLidarDriver(listener);
     }
 }

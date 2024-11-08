@@ -56,6 +56,7 @@
 #include <string>
 
 namespace sl {
+namespace internal { class LIDARSampleDataListener; }
 
 #ifdef DEPRECATED
 #define DEPRECATED_WARN(fn, replacement) do { \
@@ -565,5 +566,5 @@ namespace sl {
     * delete *lidar;
     * delete *channel;
     */
-    Result<ILidarDriver*> createLidarDriver();
+    Result<ILidarDriver*> createLidarDriver(internal::LIDARSampleDataListener* listener = nullptr);
 }
