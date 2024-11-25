@@ -75,7 +75,7 @@ namespace sl {
 
             switch (ans) {
             case RESULT_OK:
-                size_hint = 1024; //dummy value
+                size_hint = 4096; //dummy value
                 break;
             }
 
