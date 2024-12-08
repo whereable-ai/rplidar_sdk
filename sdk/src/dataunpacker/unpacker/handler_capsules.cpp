@@ -193,7 +193,6 @@ void UnpackerHandler_CapsuleNode::onData(LIDARSampleDataUnpackerInner* engine, c
         }
         _cached_scan_node_buf[_cached_scan_node_buf_pos++] = current_data;
     }
-
 }
 
 void UnpackerHandler_CapsuleNode::reset()
@@ -255,8 +254,8 @@ void UnpackerHandler_CapsuleNode::_onScanNodeCapsuleData(rplidar_response_capsul
 
                 engine->publishHQNode(_cached_last_data_timestamp_us - _getSampleDelayOffsetInExpressMode(_cachedTimingDesc, pos * 2 + cpos), &hqNode);
             }
-
         }
+		engine->publishData();
     }
 
     _cached_previous_capsuledata = capsule;
@@ -410,7 +409,6 @@ void UnpackerHandler_UltraCapsuleNode::onData(LIDARSampleDataUnpackerInner* engi
         }
         _cached_scan_node_buf[_cached_scan_node_buf_pos++] = current_data;
     }
-
 }
 
 void UnpackerHandler_UltraCapsuleNode::reset()
@@ -571,6 +569,7 @@ void UnpackerHandler_UltraCapsuleNode::_onScanNodeUltraCapsuleData(rplidar_respo
             }
 
         }
+		engine->publishData();
     }
 
     _cached_previous_ultracapsuledata = capsule;
@@ -783,6 +782,7 @@ void UnpackerHandler_DenseCapsuleNode::_onScanNodeDenseCapsuleData(rplidar_respo
             lastNodeSyncBit = syncBit;
 
         }
+		engine->publishData();
     }
 
     _cached_previous_dense_capsuledata = dense_capsule;
@@ -937,7 +937,6 @@ void UnpackerHandler_UltraDenseCapsuleNode::onData(LIDARSampleDataUnpackerInner*
         }
         _cached_scan_node_buf[_cached_scan_node_buf_pos++] = current_data;
     }
-
 }
 
 void UnpackerHandler_UltraDenseCapsuleNode::reset()
@@ -1039,6 +1038,7 @@ void UnpackerHandler_UltraDenseCapsuleNode::_onScanNodeUltraDenseCapsuleData(rpl
             _last_node_sync_bit = syncBit;
 
         }
+		engine->publishData();
     }
 
     _cached_previous_ultra_dense_capsuledata = *ultra_dense_capsule;

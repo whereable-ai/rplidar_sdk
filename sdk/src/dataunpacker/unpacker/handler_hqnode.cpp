@@ -170,7 +170,7 @@ void UnpackerHandler_HQNode::onData(LIDARSampleDataUnpackerInner* engine, const 
         }
         _cached_scan_node_buf[_cached_scan_node_buf_pos++] = current_data;
     }
-
+	engine->publishData();
 }
 
 

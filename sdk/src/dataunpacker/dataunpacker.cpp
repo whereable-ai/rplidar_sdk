@@ -183,6 +183,11 @@ public:
 		_listener.onHQNodeDecoded(timestamp_uS, node);
 	}
 
+	virtual void publishData()
+	{
+		_listener.onDataDecoded();
+	}
+
 
 	virtual void publishDecodingErrorMsg(int errorType, _u8 ansType, const void* payload, size_t size)
 	{
